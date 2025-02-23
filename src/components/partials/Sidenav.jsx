@@ -1,7 +1,11 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 const Sidenav = () => {
+
+  
+
   return (
     <div className='w-[20%] h-full  border-r-2 border-zinc-400 p-10'>
 
