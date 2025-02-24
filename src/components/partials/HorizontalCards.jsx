@@ -4,10 +4,10 @@ import Dropdown from './Dropdown'
 
 const HorizontalCards = ({ data, title }) => {
   return (
-        <div className='w-[100%] flex overflow-y-hidden mb-5 p-5'>
+        <div className='w-[100%] flex  overflow-y-hidden mb-5 p-5 '>
             {
                 data.map((d, i)=> (
-                <div key={i} className='min-w-[15%] mr-5 bg-zinc-900 '>
+                <div key={i} className='min-w-[15%] h-[35vh]  bg-zinc-900 mr-5 mb-5'>
                     <img 
                 
                         className='w-full h-[55%] object-cover'
@@ -17,7 +17,7 @@ const HorizontalCards = ({ data, title }) => {
                                 }`
                             }                 
                         alt="" />
-                    <div className='text-white p-3 h-[45%] '>
+                    <div className='text-white p-3 h-[45%] overflow-y-auto'>
                         <h1 className='text-md font-semibold '>
                         {
                             d.name ||
@@ -28,7 +28,7 @@ const HorizontalCards = ({ data, title }) => {
                         </h1>
                         <p className=''>
                             {d. overview.slice(0, 50)}...
-                            <span className='text-zinc-300'> 
+                            <span className='text-zinc-500'> 
                                 more
                             </span>
                         </p>

@@ -6,6 +6,7 @@ import Header from './partials/Header'
 import HorizontalCards from './partials/HorizontalCards'
 import { all } from 'axios'
 import Dropdown from './partials/Dropdown'
+import Loading from './Loading'
 
 
 const Home = () => {
@@ -61,7 +62,7 @@ const Home = () => {
           <HorizontalCards data={trending} />
       </div>
     </>
-  ) : <h1>Loading</h1>
+  ) : <Loading/>
 }
 
 export default Home
