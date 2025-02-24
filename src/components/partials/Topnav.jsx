@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import axios from '../../utils/axios';
-import noimage from '../../../public/noimage.jpeg'
+import noimage from '../../assets/noimage.jpeg'
 
 const Topnav = () => {
 

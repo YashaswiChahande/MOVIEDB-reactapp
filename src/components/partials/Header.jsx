@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Header = ( { data } ) => {
-    console.log(data)
   return (
     <div 
     style={{
@@ -23,7 +22,7 @@ const Header = ( { data } ) => {
                         data.original_title
                     }
             </h1>
-        <p className='w-[70%] text-white'>{data.overview.slice(0, 200)}...
+        <p className='w-[70%] mt-3 mb-3 text-white'>{data.overview.slice(0, 200)}...
             <Link className='text-blue-400'> 
                 more
             </Link>
