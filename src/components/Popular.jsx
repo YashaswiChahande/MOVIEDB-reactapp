@@ -7,26 +7,24 @@ import Cards from './partials/Cards';
 import Loading from './Loading';
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-const Trending = () => {
+const Popular = () => {
 
-    
     const navigate = useNavigate();
-    const [category, setcategory] = useState("all");
-    const [duration, setduration] = useState("day");
-    const [trending, settrending] = useState([]);
+    const [category, setcategory] = useState("movie");
+    const [popular, setpopular] = useState([]);
     const [page, setpage] = useState(1);
     const [hasMore, sethasMore] = useState(true);
-    document.title = "MovieDB | Trending " + category.toUpperCase() ;
+    document.title = "MOVIEDB | Popular "
 
-    const GetTrending = async () => {
+    const GetPopular = async () => {
         try {
           const { data } = await axios.get(
-            `/trending/${category}/${duration}?page=${page}`
+            `/${category}/popular?page=${page}`
 
           );
 
           if(data.results.length > 0){
-            settrending((prevstate) => [...prevstate, ...data.results])
+            setpopular((prevstate) => [...prevstate, ...data.results])
             setpage(page + 1)
 
           } else {
@@ -39,22 +37,20 @@ const Trending = () => {
 
     const refershHandler = () => {
 
-        if (trending.length === 0) {
-            GetTrending();
+        if (popular.length === 0) {
+            GetPopular();
         } else {
             setpage(1);
-            settrending([]);
-            GetTrending();
+            setpopular([]);
+            GetPopular();
         }
     }
 
-
-
     useEffect(() => {
         refershHandler();
-    }, [category, duration]);
+    }, [category]);
 
-  return trending.length > 0 ? (
+  return popular.length > 0 ? (
     <div className=' w-screen h-screen '>
         <div className='px-[5%] w-full flex items-center justify-between '>
             <h1 className=' text-2xl font-semibold text-zinc-400'>
@@ -62,31 +58,26 @@ const Trending = () => {
                         onClick={() => navigate(-1)}
                         className="hover:text-[#6556CD] ri-arrow-left-line" >
             </i>{" "}
-                Trending
+                Popular
             </h1>
             <div className='flex items-center w-[80%]'>
                 <Topnav className/>
                 <Dropdown 
                     title="Category" 
-                    options={['movie','tv','all']}
+                    options={['movie','tv']}
                     func={(e)=> setcategory(e.target.value)}>
                 </Dropdown>
                 <div className='w-[2%]'></div>
-                <Dropdown 
-                    title="Duration" 
-                    options={['week','day']}
-                    func={(e)=> setduration(e.target.value)}>
-                </Dropdown>
             </div>
         </div>
 
         <InfiniteScroll
-            dataLength={trending.length}
-            next={GetTrending}
+            dataLength={popular.length}
+            next={GetPopular}
             hasMore={hasMore}
             loader={<h1>Loading....</h1>}
         >
-            <Cards data={trending} title={category}/>
+            <Cards data={popular} title={category}/>
         </InfiniteScroll>
        
     </div>
@@ -95,4 +86,4 @@ const Trending = () => {
     )
 }
 
-export default Trending
+export default Popular
