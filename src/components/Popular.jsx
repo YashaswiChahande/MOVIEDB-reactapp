@@ -14,7 +14,7 @@ const Popular = () => {
     const [popular, setpopular] = useState([]);
     const [page, setpage] = useState(1);
     const [hasMore, sethasMore] = useState(true);
-    document.title = "MOVIEDB | Popular "
+    document.title = "MovieDB | Popular "
 
     const GetPopular = async () => {
         try {
@@ -58,7 +58,7 @@ const Popular = () => {
                         onClick={() => navigate(-1)}
                         className="hover:text-[#6556CD] ri-arrow-left-line" >
             </i>{" "}
-                Popular
+                Popular{" "}{`(${category})`}
             </h1>
             <div className='flex items-center w-[80%]'>
                 <Topnav className/>

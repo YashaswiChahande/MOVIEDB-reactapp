@@ -6,27 +6,27 @@ import axios from '../utils/axios';
 import Cards from './partials/Cards';
 import Loading from './Loading';
 import InfiniteScroll from 'react-infinite-scroll-component'
+import noimage from '../assets/noimage.jpeg'
 
-const Trending = () => {
+const Movie = () => {
 
     
     const navigate = useNavigate();
-    const [category, setcategory] = useState("all");
-    const [duration, setduration] = useState("day");
-    const [trending, settrending] = useState([]);
+    const [category, setcategory] = useState("now_playing");
+    const [movie, setmovie] = useState([]);
     const [page, setpage] = useState(1);
     const [hasMore, sethasMore] = useState(true);
-    document.title = "MovieDB | Trending " + category.toUpperCase() ;
+    document.title = "MovieDB | Movies "
 
-    const GetTrending = async () => {
+    const GetMovie = async () => {
         try {
           const { data } = await axios.get(
-            `/trending/${category}/${duration}?page=${page}`
+            `/movie/${category}?page=${page}`
 
           );
 
           if(data.results.length > 0){
-            settrending((prevstate) => [...prevstate, ...data.results])
+            setmovie((prevstate) => [...prevstate, ...data.results])
             setpage(page + 1)
 
           } else {
@@ -39,22 +39,21 @@ const Trending = () => {
 
     const refershHandler = () => {
 
-        if (trending.length === 0) {
-            GetTrending();
+        if (movie.length === 0) {
+            GetMovie();
         } else {
             setpage(1);
-            settrending([]);
-            GetTrending();
+            setmovie([]);
+            GetMovie();
         }
     }
 
-
-
     useEffect(() => {
         refershHandler();
-    }, [category, duration]);
+    }, [category]);
 
-  return trending.length > 0 ? (
+
+  return movie.length > 0 ? (
     <div className=' w-screen h-screen '>
         <div className='px-[5%] w-full flex items-center justify-between '>
             <h1 className=' text-2xl font-semibold text-zinc-400'>
@@ -62,31 +61,29 @@ const Trending = () => {
                         onClick={() => navigate(-1)}
                         className="hover:text-[#6556CD] ri-arrow-left-line" >
             </i>{" "}
-                Trending{" "}{`(${category}-${duration})`}
+                Movies
+                <small className='ml-2 text-sm text-zinc-600'>
+
+                </small>
             </h1>
             <div className='flex items-center w-[80%]'>
                 <Topnav className/>
                 <Dropdown 
                     title="Category" 
-                    options={['movie','tv','all']}
+                    options={['popular','top_rated', 'upcoming', 'now_playing']}
                     func={(e)=> setcategory(e.target.value)}>
                 </Dropdown>
                 <div className='w-[2%]'></div>
-                <Dropdown 
-                    title="Duration" 
-                    options={['week','day']}
-                    func={(e)=> setduration(e.target.value)}>
-                </Dropdown>
             </div>
         </div>
 
         <InfiniteScroll
-            dataLength={trending.length}
-            next={GetTrending}
+            dataLength={movie.length}
+            next={GetMovie}
             hasMore={hasMore}
             loader={<h1>Loading....</h1>}
         >
-            <Cards data={trending} title={category}/>
+            <Cards data={movie} title={category}/>
         </InfiniteScroll>
        
     </div>
@@ -95,4 +92,4 @@ const Trending = () => {
     )
 }
 
-export default Trending
+export default Movie
