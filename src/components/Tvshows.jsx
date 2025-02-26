@@ -7,25 +7,26 @@ import Cards from './partials/Cards';
 import Loading from './Loading';
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-const Movie = () => {
+const Tvshows = () => {
 
     
+    
     const navigate = useNavigate();
-    const [category, setcategory] = useState("now_playing");
-    const [movie, setmovie] = useState([]);
+    const [category, setcategory] = useState("airing_today");
+    const [tv, settv] = useState([]);
     const [page, setpage] = useState(1);
     const [hasMore, sethasMore] = useState(true);
-    document.title = "MovieDB | Movies "
+    document.title = "MovieDB | Tv Shows "
 
-    const GetMovie = async () => {
+    const GetTv = async () => {
         try {
           const { data } = await axios.get(
-            `/movie/${category}?page=${page}`
+            `/tv/${category}?page=${page}`
 
           );
 
           if(data.results.length > 0){
-            setmovie((prevstate) => [...prevstate, ...data.results])
+            settv((prevstate) => [...prevstate, ...data.results])
             setpage(page + 1)
 
           } else {
@@ -38,12 +39,12 @@ const Movie = () => {
 
     const refershHandler = () => {
 
-        if (movie.length === 0) {
-            GetMovie();
+        if (tv.length === 0) {
+            GetTv();
         } else {
             setpage(1);
-            setmovie([]);
-            GetMovie();
+            settv([]);
+            GetTv();
         }
     }
 
@@ -52,7 +53,7 @@ const Movie = () => {
     }, [category]);
 
 
-  return movie.length > 0 ? (
+  return tv.length > 0 ? (
     <div className=' w-screen h-screen '>
         <div className='px-[5%] w-full flex items-center justify-between '>
             <h1 className=' text-2xl font-semibold text-zinc-400'>
@@ -60,7 +61,7 @@ const Movie = () => {
                         onClick={() => navigate(-1)}
                         className="hover:text-[#6556CD] ri-arrow-left-line" >
             </i>{" "}
-                Movies
+                TV Shows
                 <small className='ml-2 text-sm text-zinc-600'>
                     {category}
                 </small>
@@ -69,7 +70,11 @@ const Movie = () => {
                 <Topnav className/>
                 <Dropdown 
                     title="Category" 
-                    options={['popular','top_rated', 'upcoming', 'now_playing']}
+                    options={[
+                        'on_the_air', 
+                        'popular',
+                        'top_rated', 
+                        'airing_today']}
                     func={(e)=> setcategory(e.target.value)}>
                 </Dropdown>
                 <div className='w-[2%]'></div>
@@ -77,12 +82,12 @@ const Movie = () => {
         </div>
 
         <InfiniteScroll
-            dataLength={movie.length}
-            next={GetMovie}
+            dataLength={tv.length}
+            next={GetTv}
             hasMore={hasMore}
             loader={<h1>Loading....</h1>}
         >
-            <Cards data={movie} title={category}/>
+            <Cards data={tv} title={category}/>
         </InfiniteScroll>
        
     </div>
@@ -91,4 +96,4 @@ const Movie = () => {
     )
 }
 
-export default Movie
+export default Tvshows

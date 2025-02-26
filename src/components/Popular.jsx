@@ -58,7 +58,10 @@ const Popular = () => {
                         onClick={() => navigate(-1)}
                         className="hover:text-[#6556CD] ri-arrow-left-line" >
             </i>{" "}
-                Popular{" "}{`(${category})`}
+                Popular
+                <small className='ml-2 text-sm text-zinc-600'>
+                    {category}
+                </small>
             </h1>
             <div className='flex items-center w-[80%]'>
                 <Topnav className/>
