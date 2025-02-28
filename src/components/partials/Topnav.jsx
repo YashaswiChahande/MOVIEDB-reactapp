@@ -37,11 +37,12 @@ const Topnav = () => {
                     className="  text-zinc-400 text-3xl ri-close-fill right-0 ">
                 </i>) }
         
-        <div className='absolute w-[50%] max-h-[50vh] bg-zinc-200 top-[100%] left-[5%] overflow-auto rounded'> 
+        <div className='z-[100] absolute w-[50%] max-h-[50vh] bg-zinc-200 top-[100%] left-[5%] overflow-auto rounded'> 
             {
             searches.map((s, i)=> (
 
                 <Link 
+                to={`/${s.media_type}/details/${s.id}`}
                     key={i}
                     className=" hover:text-black hover:bg-zinc-300 duration-300 font-semibold text-zinc-600  p-10 w-[100%] flex justify-start border-b-2 border-zinc-100  items-center">
                     <img 
