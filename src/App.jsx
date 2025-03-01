@@ -12,6 +12,7 @@ import ContactUs from './components/ContactUs'
 import Moviedetails from './components/Moviedetails'
 import Tvdetails from './components/Tvdetails'
 import Persondetails from './components/Persondetails'
+import Trailer from './components/partials/Trailer'
 
 const App = () => {
   return (
@@ -21,7 +22,11 @@ const App = () => {
           <Route path='/trending' element={<Trending/>} />
           <Route path='/popular' element={<Popular/>} />
           <Route path='/movie' element={<Movie/>} />
-          <Route path='/movie/details/:id' element={<Moviedetails/>} />
+          <Route path='/movie/details/:id' element={<Moviedetails/>} > 
+              <Route 
+                  path='/movie/details/:id/trailer' 
+                  element={<Trailer/>}/>
+          </Route>
           <Route path='/tv' element={<Tvshows/>} />
           <Route path='/tv/details/:id' element={<Tvdetails/>} />
           <Route path='/people' element={<People/>} />

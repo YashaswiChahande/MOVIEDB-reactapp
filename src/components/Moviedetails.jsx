@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { asyncloadmovie, removemovie } from '../store/actions/movieActions';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Loading from './Loading';
 import noimage from '../assets/noimage.jpeg'
 import { title } from 'framer-motion/client';
+import HorizontalCards from '../components/partials/HorizontalCards'
 
 const Moviedetails = () => {
 
@@ -30,7 +31,7 @@ const Moviedetails = () => {
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
   }}
-  className="relative w-screen h-[140vh] px-[10%]">
+  className="relative w-screen h-[175vh] px-[10%]">
 
       {/* part 1 navigation */}
       <nav className='h-[10vh] w-full text-zinc-100 flex items-center gap-10 text-xl '>
@@ -102,7 +103,10 @@ const Moviedetails = () => {
                 </h1>
                 <p className='mb-10' >{info.translations.join(", ")}</p>
 
-                <Link className='mt-10 py-5 px-10 bg-[#6556CD] rounded-lg' to={`${pathname}/trailer`} >Play Trailer</Link>
+                <Link className='mt-10 py-5 px-10 bg-[#6556CD] rounded-lg' to={`${pathname}/trailer`} > 
+                <i className="text-xl ri-play-fill mr-3 "></i>
+                Play Trailer
+                </Link>
 
             </div>
         </div>
@@ -179,6 +183,18 @@ const Moviedetails = () => {
                   
                   }
           </div>
+        {/* part 4 Recommendation & Similar Stuff */}   
+        <hr className='mt-10 mb-5 border-none h-[2px] bg-zinc-500' />
+        <h1 className='text-3xl font-bold text-white'> 
+          Recommendations & Similar stuff
+        </h1>   
+          <HorizontalCards 
+            data={
+              info.recommendations.length > 0 
+                        ? info.recommendations 
+                        : info.similar
+                  } />
+          <Outlet/>
     </div>
   ) : <Loading/>
 }
