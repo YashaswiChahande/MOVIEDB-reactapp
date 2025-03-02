@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Dropdown from './Dropdown'
+import { h1 } from 'framer-motion/client'
 
 const HorizontalCards = ({ data, title }) => {
   return (
         <div className='w-[100%] flex  overflow-y-hidden mb-5 p-5 '>
             {
-                data.map((d, i)=> (
+                data.length > 0 ? data.map((d, i)=> (
                 <Link 
                     to={`/${d.media_type}/details/${d.id}`} 
                     key={i} 
@@ -37,7 +38,9 @@ const HorizontalCards = ({ data, title }) => {
                         </p>
                     </div>
                 </Link>
-            ))}
+            )) : <h1 className='text-3xl mt-5 text-white font-black text-center'>
+                nothing to show
+                </h1>}
         </div>
         
     )

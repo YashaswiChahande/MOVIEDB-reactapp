@@ -1,4 +1,4 @@
-import notfound from "/404.gif";
+import notfound from "../assets/404.gif";
 
 const NotFound = () => {
     return (
