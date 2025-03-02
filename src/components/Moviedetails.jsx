@@ -6,6 +6,8 @@ import Loading from './Loading';
 import noimage from '../assets/noimage.jpeg'
 import { title } from 'framer-motion/client';
 import HorizontalCards from '../components/partials/HorizontalCards'
+import Trailer from '../components/partials/Trailer'
+
 
 const Moviedetails = () => {
 
@@ -193,10 +195,15 @@ const Moviedetails = () => {
               info.recommendations.length > 0 
                         ? info.recommendations 
                         : info.similar
+
+                                          
                   } />
-          <Outlet/>
+          <Outlet/>  
     </div>
-  ) : <Loading/>
+    
+  ) :  (
+  <Loading/> 
+)
 }
 
 export default Moviedetails
