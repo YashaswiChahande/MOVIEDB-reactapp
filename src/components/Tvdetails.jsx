@@ -33,7 +33,7 @@ const Tvdetails = () => {
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
   }}
-  className="relative w-screen h-[220vh] px-[10%]">
+  className="relative w-screen h-[225vh] px-[10%]">
 
       {/* part 1 navigation */}
       <nav className='h-[10vh] w-full text-zinc-100 flex items-center gap-10 text-xl '>
@@ -191,13 +191,11 @@ const Tvdetails = () => {
           Seasons
         </h1>   
          <div className='w-[100%] flex  overflow-y-hidden  mb-5 p-5 '>
-          {info.detail.seasons.map((s,i)=>(
-            <div 
-            className='flex flex-col '
-            key={i}
-            >
+          {info.detail.seasons.length > 0 ? info.detail.seasons.map((s,i)=>(
+            <div key={i}
+            className='w-[15vh] m-[3.3%] ' >
               <img 
-                    className="shadow-[8px_17px_38px_2px_rgba(0,0,0,0.3)] h-[40vh] object-cover" 
+                    className="shadow-[8px_17px_38px_2px_rgba(0,0,0,0.3)] min-w-[11vw] h-[35vh] object-cover" 
                     src={
                         s.poster_path || s.backdrop_path || s.profile_path ?
                         `https://image.tmdb.org/t/p/original/${
@@ -207,16 +205,15 @@ const Tvdetails = () => {
                                 }` : noimage} 
                     alt="" />
                 <h1 className='text-2xl text-zinc-400 mt-3 font-semibold'>
-                {
-                        s.name ||
-                        s.title ||
-                        s.original_name ||
-                        s.original_title
-                        
-                    }
+                {s.name }
                 </h1>
             </div>
-          ))}
+          )) : (
+            <h1 className="text-3xl mt-5 text-white font-black text-center">
+                Nothing to show
+            </h1>
+        )}
+       
          </div>
           {/* part 5 Recommendation & Similar Stuff */}   
         <hr className='mt-10 mb-5 border-none h-[2px] bg-zinc-500' />
