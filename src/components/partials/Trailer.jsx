@@ -9,28 +9,26 @@ const Trailer = () => {
     const { pathname } = useLocation();
     const category = pathname.includes("movie") ? "movie" : "tv";
     const ytvideo = useSelector((state) => state[category].info.videos);
-    console.log(ytvideo)
-
-
-  return ytvideo ? (
-    <div className="bg-[rgba(0,0,0,.9)] absolute z-[100] top-0 left-0 w-screen h-screen flex items-center justify-center">
-         <Link
-                    onClick={() => navigate(-1)}
-                    className="absolute hover:text-[#6556CD] ri-close-fill text-3xl text-white right-[5%]">
-
-      </Link>
-      {ytvideo ? (
+    ytvideo && ytvideo.name && (document.title = "MovieDB | " + ytvideo.name);
+    return (
+        <div className="bg-[rgba(0,0,0,.9)] absolute z-[100] top-0 left-0 w-screen h-screen flex items-center justify-center">
+            <Link
+                onClick={() => navigate(-1)}
+                className="absolute hover:text-[#6556CD] ri-close-fill text-3xl text-white right-[5%] top-[5%]"
+            ></Link>
+            {ytvideo ? (
                 <ReactPlayer
                     controls
-                    height={800}
-                    width={1500}
+                    height={600}
+                    width={1400}
                     url={`https://www.youtube.com/watch?v=${ytvideo.key}`}
                 />
             ) : (
                 <NotFound />
             )}
-    </div>
-  ) 
-}
+        </div>
+    );
+};
+
 
 export default Trailer
