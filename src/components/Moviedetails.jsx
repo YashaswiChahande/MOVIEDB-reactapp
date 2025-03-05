@@ -11,7 +11,7 @@ import Trailer from '../components/partials/Trailer'
 
 const Moviedetails = () => {
 
-  const {pathname} = useLocation;
+  const {pathname} = useLocation();
   const navigate = useNavigate();
   const {id} = useParams();
   const {info} = useSelector(state => state.movie);
@@ -105,7 +105,8 @@ const Moviedetails = () => {
                 </h1>
                 <p className='mb-10' >{info.translations.join(", ")}</p>
 
-                <Link className='mt-10 py-5 px-10 bg-[#6556CD] rounded-lg' to={`${pathname}/trailer`} > 
+                <Link  to={`${pathname}/trailer`} 
+                className='mt-10 py-5 px-10 bg-[#6556CD] rounded-lg'  > 
                 <i className="text-xl ri-play-fill mr-3 "></i>
                 Play Trailer
                 </Link>
@@ -115,9 +116,7 @@ const Moviedetails = () => {
 
         {/* part 3 Available on platform */}   
         <div className='w-[80%] flex flex-col gap-y-5 mt-10'>
-          
-
-            
+          hr
             {
                 info.watchproviders && 
                   info.watchproviders.flatrate && 

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Dropdown from './Dropdown'
 import { h1 } from 'framer-motion/client'
+import noimage from '../../assets/noimage.jpeg'
 
 const HorizontalCards = ({ data, title }) => {
   return (
@@ -16,9 +17,10 @@ const HorizontalCards = ({ data, title }) => {
                 
                         className='w-full h-[55%] object-cover'
                         src={
+                            d.backdrop_path || d.poster_path ?
                             `https://image.tmdb.org/t/p/original${
                                 d.backdrop_path || d.poster_path
-                                }`
+                                }` : noimage
                             }                 
                         alt="" />
                     <div className='text-white p-3 h-[45%] overflow-y-auto'>

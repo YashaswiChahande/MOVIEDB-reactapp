@@ -10,7 +10,7 @@ import Trailer from '../components/partials/Trailer'
 
 const Tvdetails = () => {
 
-  const {pathname} = useLocation;
+  const {pathname} = useLocation();
     const navigate = useNavigate();
     const {id} = useParams();
     const {info} = useSelector(state => state.tv);
@@ -105,7 +105,7 @@ const Tvdetails = () => {
                 </h1>
                 <p className='mb-10' >{info.translations.join(", ")}</p>
 
-                <Link className='mt-10 py-5 px-10 bg-[#6556CD] rounded-lg' to={`${pathname}/trailer`} > 
+                <Link  to={`${pathname}/trailer`} className='mt-10 py-5 px-10 bg-[#6556CD] rounded-lg'  > 
                 <i className="text-xl ri-play-fill mr-3 "></i>
                 Play Trailer
                 </Link>
