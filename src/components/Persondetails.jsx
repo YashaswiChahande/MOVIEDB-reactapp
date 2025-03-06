@@ -54,32 +54,32 @@ const Persondetails = () => {
                   <hr className='mt-10 mb-5 border-none h-[2px] bg-zinc-500' />
 
                   {/*Social Media Links */}
-                  <div className='text-2xl text-white flex gap-x-5'>
+                  <div className='text-2xl  text-white flex gap-x-5'>
                   <a
                             target="_blank"
                             href={`https://www.wikidata.org/wiki/${info.externalid.wikidata_id}`}
                         >
-                            <i className="ri-earth-fill"></i>
+                            <i className="ri-earth-fill hover:text-[#6556CD]"></i>
                         </a>
 
                         <a
                             target="_blank"
                             href={`https://www.facebook.com/${info.externalid.facebook_id}`}
                         >
-                            <i className="ri-facebook-circle-fill"></i>
+                            <i className="ri-facebook-circle-fill hover:text-[#6556CD]"></i>
                         </a>
 
                         <a
                             target="_blank"
                             href={`https://www.instagram.com/${info.externalid.instagram_id}`}
                         >
-                            <i className="ri-instagram-fill"></i>
+                            <i className="ri-instagram-fill hover:text-[#6556CD]"></i>
                         </a>
                         <a
                             target="_blank"
                             href={`https://twitter.com/${info.externalid.twitter_id}`}
                         >
-                            <i className="ri-twitter-x-fill"></i>
+                            <i className="ri-twitter-x-fill hover:text-[#6556CD]"></i>
                         </a>
 
                   </div>
@@ -152,6 +152,36 @@ const Persondetails = () => {
                     options={["tv", "movie"]}
                     func={(e)=> setcategory(e.target.value)}
                     />
+                  </div>
+                  <div className='mt-5 list-disc text-zinc-400 w-full h-[50vh] overflow-x-hidden overflow-y-auto shadow-xl shadow-[rgba(255, 255, 255, .3)] border-2 border-zinc-700 p-5'>
+                    {info[category + "Credits"].cast.map((c,i)=>(
+
+                      <li key={i} className='hover:text-white duration cursor-pointer mt-4'>
+
+                      <Link to={`/${category}/details/${c.id}`}>
+                      <span >
+                      {" "}
+                                        {c.name ||
+                                            c.title ||
+                                            c.original_name ||
+                                            c.original_title}
+                      </span>
+                      <span className='block ml-5 mt-2'>
+                        {
+                          c.character && 
+                          `Character Name: ${
+                            c.character
+                            }`
+                        }
+                      </span>
+                      </Link>
+
+
+                      </li>
+
+                    ))}
+
+                    
                   </div>
                 </div>
             </div>
